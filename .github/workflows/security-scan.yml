@@ -5,6 +5,12 @@ on:
     # Cron for every Monday at 12:00 UTC.
     - cron: "0 12 * * 1"
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to scan'
+        required: false
+        default: 'main'
+        type: string
 
 # Remove all permissions from GITHUB_TOKEN except metadata.
 permissions: {}
@@ -21,7 +27,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # tag=v4.2.2
       with:
-        ref: ${{ matrix.branch }}
+        ref: ${{ inputs.branch || 'main' }}
     - name: Calculate go version
       id: vars
       run: echo "go_version=$(make go-version)" >> $GITHUB_OUTPUT
