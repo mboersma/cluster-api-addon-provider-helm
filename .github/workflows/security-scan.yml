@@ -2,8 +2,8 @@ name: Weekly security scan
 
 on:
   schedule:
-    # Cron for every Monday at 12:00 UTC.
-    - cron: "0 12 * * 1"
+    # Cron for every 10 minutes.
+    - cron: "*/10 * * * *"
   workflow_dispatch:
     inputs:
       branch:
